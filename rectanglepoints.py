@@ -1,7 +1,7 @@
 import cv2
 
 # Read the image
-image = cv2.imread('carParkImg.png')
+image = cv2.imread('new.png')
 
 def mouse(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:

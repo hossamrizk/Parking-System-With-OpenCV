@@ -3,9 +3,10 @@ import cvzone
 import pickle
 import numpy as np
 
-cap = cv2.VideoCapture('carPark.mp4')
+cap = cv2.VideoCapture('parking.mp4')
 
-width, height = 106, 44
+width, height = 41, 23
+
 
 with open('carpositions', 'rb') as f:
     poslist = pickle.load(f)
@@ -20,18 +21,18 @@ def checkspace(imgpro):
         #cv2.imshow(str(x+y),crop)
 
         count = cv2.countNonZero(crop)
-        cvzone.putTextRect(img, str(count), (x,y+height-10), scale = 1, thickness=1,offset=1,colorR=(0,0,255))
+        cvzone.putTextRect(img, str(count), (x,y+height-10), scale = 0.5, thickness=1,offset=1,colorR=(0,0,255))
 
-        if count <1750:
+        if count <370:
             color = (0,255,0)
-            thickness = 5
+            thickness = 3
             spacecount +=1
         else:
             color = (0,0,255)
             thickness = 2
 
         cv2.rectangle(img, pos, (pos[0] + width, pos[1] + height), color, thickness=thickness)
-    cvzone.putTextRect(img, f'free places are: {spacecount} from {len(poslist)} places ', (100,50), scale = 3, thickness=5,offset=20,colorR=(0,200,0))
+    cvzone.putTextRect(img, f'free places are: {spacecount} from {len(poslist)} places ', (100,50), scale = 2, thickness=3,offset=10,colorR=(0,240,0))
 
 while True:
     if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
